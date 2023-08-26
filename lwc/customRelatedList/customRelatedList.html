@@ -1,0 +1,38 @@
+<template>
+    <lightning-card class="slds-p-left_large" title={cardLabel} icon-name="standard:case">
+        <div class="slds-p-bottom_large slds-p-left_large filters_width">
+            <lightning-combobox label="Filter by Object Name" options={filterOptions} value={status} onchange={handleSelection}
+            class="slds-m-bottom_small"></lightning-combobox>
+            <lightning-input label="Search by Record Name" onchange={handleSearch}></lightning-input>
+        </div>
+        <div class="slds-scrollable_y slds-p-top_large slds-p-bottom_large scroll_size" tabindex="0">
+            <template lwc:if={showRecords}>
+                <template for:each={recordsToDisplay} for:item="rec">
+                    <div key={rec.Id} class="slds-m-bottom_small">
+                        <lightning-tile class="slds-p-left_large" data-id={rec.Id} label={rec.RecordName}
+                            onclick={handleRecordURL} href={recordPageUrl}>
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate" title="Status">Status:</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    <p class="slds-truncate" title="Status">{rec.RecordStatus}</p>
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate" title="Date">Date:</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    <p class="slds-truncate" title="Date">{rec.RecordDate}</p>
+                                </dd>
+                            </dl>
+                        </lightning-tile>
+                    </div>
+                </template>
+            </template>
+            <template lwc:else>
+                <p class="slds-p-left_large warning_msg">No records to display.</p>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>

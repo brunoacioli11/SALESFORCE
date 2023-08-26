@@ -1,0 +1,38 @@
+<!-- filteredRelatedCaseList.html -->
+<template>
+    <lightning-card title={cardLabel} icon-name="standard:case">
+        <lightning-combobox label="Status Filter" options={filterOptions} value={status} onchange={handleSelection}
+            class="slds-m-bottom_small"></lightning-combobox>
+        <template lwc:if={showCases}>
+            <template for:each={casesToDisplay} for:item="cas">
+                <div key={cas.fields.Id.value} class="slds-m-bottom_small">
+                    <lightning-tile label={cas.fields.CaseNumber.value}>
+                        <dl class="slds-dl_horizontal">
+                            <dt class="slds-dl_horizontal__label">
+                                <p class="slds-truncate" title="Subject">Subject:</p>
+                            </dt>
+                            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate" title="Subject">{cas.fields.Subject.value}</p>
+                            </dd>
+                            <dt class="slds-dl_horizontal__label">
+                                <p class="slds-truncate" title="Status">Status:</p>
+                            </dt>
+                            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate" title="Status">{cas.fields.Status.value}</p>
+                            </dd>
+                            <dt class="slds-dl_horizontal__label">
+                                <p class="slds-truncate" title="Priority">Priority:</p>
+                            </dt>
+                            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate" title="Priority">{cas.fields.Priority.value}</p>
+                            </dd>
+                        </dl>
+                    </lightning-tile>
+                </div>
+            </template>
+        </template>
+        <template lwc:else>
+            <p>No Case records to display.</p>
+        </template>
+    </lightning-card>
+</template>
